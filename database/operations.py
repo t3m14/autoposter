@@ -10,7 +10,7 @@ def create_post(username: str, message_id: int):
         logger.error(f"Пост уже существует - {ex}")
 
 # Получение поста
-def get_post(message_id: int):
+def get_post(message_id: int) -> Post:
     try:
         return Post.get(Post.message_id == message_id)
     except:

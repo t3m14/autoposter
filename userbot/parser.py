@@ -23,5 +23,6 @@ async def start_parse(application: Client, private_public: str, public_public: s
         msg = await app.get_messages(post.username, post.message_id)
         await msg.copy(public_public)
         await app.send_message(private_public, "Пост успешно опубликован!")
+    print(1)
     await idle()
     await app.stop()

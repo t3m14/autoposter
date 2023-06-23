@@ -18,13 +18,7 @@ def load_config():
     CONFIG["ADMIN_IDS"] = json.loads(os.environ.get("ADMIN_IDS"))
     logger.info("Конфиг загружен")
 async def run():
-    # app_data = await load_app.start("89292394343")
-    # if (type(app_data) is dict):
-    #     code = input("Code: ")
-    #     app = await load_app.authApp(app_data, code)
-    # else:
-    #     app = app_data
-    # await parser.start_parse(app, "hhfdssaqq", "qqq111c", ["FFFwwew"])
+    
     await start()
 if __name__ == "__main__":
     # Загружаем переменные окружения в конфиг

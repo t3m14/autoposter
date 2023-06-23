@@ -1,28 +1,27 @@
-from peewee import SqliteDatabase, Model, _StringField, IntegerField, ForeignKeyField
+from peewee import SqliteDatabase, Model, _StringField, IntegerField, ForeignKeyField, BooleanField, ManyToManyField
 
-db = SqliteDatabase("posts.db")
+db = SqliteDatabase("app.db")
 
 
-class Post(Model):
+class BaseModel(Model):
+    class Meta:
+        database = db
+
+
+class Post(BaseModel):
     username = _StringField(null=False)
     message_id = IntegerField(null=False, unique=True)
 
-    class Meta:
-        database = db
 
 
-class Config(Model):
+
+class Config(BaseModel):
     user_id = IntegerField(unique=True)
-    public_public = _StringField()
-    private_public = _StringField()
-
-    class Meta:
-        database = db
+    public_public_id = _StringField(null=True)
+    private_public_id = _StringField(null=True)
+    is_subscribed = BooleanField(default=False)
 
 
-class Source_public(Model):
-    source_public = _StringField()
-    config = ForeignKeyField(Config, backref="source_publics")
-
-    class Meta:
-        database = db
+class Source_public(BaseModel):
+    source_public_id = _StringField(null=False, unique=True)
+    config_id = ForeignKeyField(Config)
